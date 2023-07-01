@@ -6,9 +6,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 
 # Create model
-# from ai import StableDiffusion
-# model = StableDiffusion()
-# model.build_model()
+from ai import StableDiffusion
+model = StableDiffusion()
+model.build_model()
 
 # Create server
 app = FastAPI(
@@ -44,9 +44,7 @@ def index(request: Request):
 
 @app.get("/api/v1.0/predict/{caption}", tags=["ai"])
 def crear_posteo(caption: str):
-    # img_data = model.predict(input_data.text)
-        # Crear una imagen PIL desde el arreglo NumPy
-    img_data = 0
+    img_data = model.predict(caption)
     stream = utils.create_stream(img_data)
 
     # Return generate image as stream io.Byte array
