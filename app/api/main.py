@@ -6,9 +6,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from schemas import PredictSchema
 
 # Create model
-from ai import StableDiffusion
-model = StableDiffusion()
-model.build_model()
+# from ai import StableDiffusion
+# model = StableDiffusion()
+# model.build_model()
 
 # Create server
 app = FastAPI(
@@ -44,7 +44,8 @@ def index(request: Request):
 
 @app.post("/api/v1.0/predict", tags=["ai"])
 def crear_posteo(input_data: PredictSchema):
-    img_data = model.predict(input_data.text)    
+    # img_data = model.predict(input_data.text)
+    img_data = "asdasd"
     return {"inference": img_data}
 
 
