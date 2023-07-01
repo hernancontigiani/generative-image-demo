@@ -1,22 +1,27 @@
+
+
 const boton = document.querySelector("#generate")
+const imageOutput = document.getElementById("imageOutput");
 
 boton.onclick = async () => {
+    // Clean image
+    imageOutput.src = "";
+    
     const caption = document.querySelector("#caption").value;
-    const data = {
-        text: caption,
+    if(caption == "") {   
+        alert("Please describe what iamge you would like to generate");
+        return;
     }
-    const url = `/api/v1.0/predict`
 
-    const resp = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
+    // Loading image...
+    imageOutput.src = "/static/images/loading.jpg";
+    
+    const url = `/api/v1.0/predict/${caption}`;
+    const resp = await fetch(url);
     if(resp.ok) {
-        const data = await resp.json();
-        console.log(data);
+        const data = await resp.blob();
+        const imagenURL = URL.createObjectURL(data);
+        // imageOutput.src = imagenURL;
     } else {
         // Request fail
         const data = await resp.json();

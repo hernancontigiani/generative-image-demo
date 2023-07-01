@@ -1,21 +1,25 @@
 import io
 import base64
+from PIL import Image
 
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 
-
-def graph(image):
+def create_stream(image_data):
     ''' 
-    Transform raw numpy image to io.BytesIO for HTML renderization
+    Transform raw numpy image to io.BytesIO stream for HTML renderization
     '''
-    fig, ax = plt.subplots(figsize=(20, 20))
-    plt.axis("off")
-    plt.imshow(image)
+    #image = Image.fromarray(image_data)
+    image = Image.open("pokemon.jpg") 
 
-    image_html = io.BytesIO()
-    FigureCanvas(fig).print_png(image_html)
-    plt.close(fig)
-    return image_html
+    # Create stream buffer
+    stream = io.BytesIO()
+
+    # Save image as JPG inside stream
+    image.save(stream, format="JPEG")
+
+    stream.seek(0)
+    return stream
+

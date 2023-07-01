@@ -3,7 +3,7 @@ import utils
 import uvicorn
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from schemas import PredictSchema
+from fastapi.responses import StreamingResponse
 
 # Create model
 # from ai import StableDiffusion
@@ -42,11 +42,15 @@ def index(request: Request):
 
 # ---------------- API ------------------------ #
 
-@app.post("/api/v1.0/predict", tags=["ai"])
-def crear_posteo(input_data: PredictSchema):
+@app.get("/api/v1.0/predict/{caption}", tags=["ai"])
+def crear_posteo(caption: str):
     # img_data = model.predict(input_data.text)
-    img_data = "asdasd"
-    return {"inference": img_data}
+        # Crear una imagen PIL desde el arreglo NumPy
+    img_data = 0
+    stream = utils.create_stream(img_data)
+
+    # Return generate image as stream io.Byte array
+    return StreamingResponse(stream, media_type="image/jpeg")
 
 
 if __name__ == "__main__":
