@@ -1,3 +1,5 @@
+cd api
+
 echo "Download decoder"
 rm -f decoder.zip
 rm -rf decoder
