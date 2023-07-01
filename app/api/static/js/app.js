@@ -21,7 +21,7 @@ boton.onclick = async () => {
     if(resp.ok) {
         const data = await resp.blob();
         const imagenURL = URL.createObjectURL(data);
-        // imageOutput.src = imagenURL;
+        imageOutput.src = imagenURL;
     } else {
         // Request fail
         const data = await resp.json();
