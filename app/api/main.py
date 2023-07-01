@@ -1,9 +1,9 @@
-import utils
-
 import uvicorn
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
+
+import utils
 
 # Create model
 from ai import StableDiffusion
@@ -43,9 +43,9 @@ def index(request: Request):
 # ---------------- API ------------------------ #
 
 @app.get("/api/v1.0/predict/{caption}", tags=["ai"])
-def crear_posteo(caption: str):
+def predict(caption: str):
     img_data = model.predict(caption)
-    stream = utils.create_stream(img_data)
+    stream = utils.create_stream(img_data[0])
 
     # Return generate image as stream io.Byte array
     return StreamingResponse(stream, media_type="image/jpeg")
