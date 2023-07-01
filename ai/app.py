@@ -1,7 +1,7 @@
 import traceback
 
 import utils
-from core import StableDiffusion
+from ai import StableDiffusion
 
 from flask import Flask, jsonify, Response
 
@@ -20,8 +20,12 @@ def index():
             '''
     return msg
 
+@app.route("/api/v1.0/predict/", methods=['POST'])
+def api_predict():
+    return {"inference": "hola"}
 
-@app.route("/predict/<input_text>/render")
+
+@app.route("/predict/<input_text>/render", methods=['POST'])
 def predict(input_text):
     try:
         # Predict
