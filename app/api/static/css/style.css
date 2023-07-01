@@ -78,3 +78,25 @@ button {
 button:hover {
   opacity: 0.9;
 }
+
+#containerForm {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 16px;
+}
+
+#containerForm label {
+  padding-top: 16px;
+}
+
+#containerForm input {
+  font-size: 20px;
+  width: 100%;
+}
+
+#containerForm textarea {
+  font-size: 16px;
+  width: 100%;
+}
