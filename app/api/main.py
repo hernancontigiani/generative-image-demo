@@ -42,7 +42,7 @@ def index(request: Request):
 
 # ---------------- API ------------------------ #
 
-@app.get("/api/v1.0/predict/{caption}", tags=["ai"])
+@app.get("/api/v1.0/predict", tags=["ai"])
 def predict(caption: str):
     img_data = model.predict(caption)
     stream = utils.create_stream(img_data[0])

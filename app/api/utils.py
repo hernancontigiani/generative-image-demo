@@ -12,7 +12,7 @@ def create_stream(image_data):
     Transform raw numpy image to io.BytesIO stream for HTML renderization
     '''
     image = Image.fromarray(image_data)
-    # image = Image.open("pokemon.jpg") 
+    # image = Image.open("pokemon.jpg")  # mock
 
     # Create stream buffer
     stream = io.BytesIO()
