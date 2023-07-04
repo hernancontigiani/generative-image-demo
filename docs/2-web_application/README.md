@@ -37,6 +37,8 @@ $ docker run --rm -it -p 8501:8501 -v $(pwd)/diffusion_model:/models/diffusion_m
 
 The previous example creates an API for that model inference. In case that you are interesting in testing TFX with something that consume less PC resources, just checkout my repository for examples, like:
 
+[Chatbot with TFX](https://github.com/hernancontigiani/chatbot_dnn_tfx)
+
 [Bert with TFX](https://github.com/hernancontigiani/bert_tf_serving)
 
 
