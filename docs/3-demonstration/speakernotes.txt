@@ -1,0 +1,65 @@
+-- SLIDE 1 --
+Hello world! My name is Hernán, I'm an AI specialist software engineer with most experience in DeepLearning field. Today we are going to talk about latent diffusion models, how they work and how we could deploy an AI solution like this.
+
+-- SLIDE 2 --
+First we need to start talking about diffusion, about how the model is capable of creating a new image from a text description. Well, image that your friend start telling you a history about:
+“How he spend his vacations in the mountain”
+
+Somehow using your friend's storytelling you can imagine that in your mind, right? This is because you are using your own life experience to create an image in your mind using the details of objects, colors, shapes based on your friend's story.
+
+But the image that you imagine will never be as exact as your friend's life experience memory of that place, because you were not there. That ability from us humans to image based on experience is the same that this model is making here for us. 
+
+-- SLIDE 3 --
+How does the model “store” experience and how does it use it?
+The model transforms the text input into a vector using a text encoder, for example CLIP encoder from OpenAI. That makes available a vector which represents the text image that we want to generate.
+
+The model was previously trained with image and caption, so in this latent space of vectors, a text description will be close to the “kind of image” that the user wants to generate when he input “two people on the mountain”. For example, in this story we need to create an image with mountains and people, any “dream” with that kind of information is a good image.
+
+-- Slide 4 --
+The model starts creating the desired image from nothing (noise) and the input text vector, all in the latent space, until some iteration the “dreaming process” finishes and the system creates the desired output.
+Take into account that as this model is imagining or dreaming the output image, every time you ask for it with the same text you will have a different output. It the same like your friend telling again his story a couple of days after he travel
+
+-- SLIDE 5 -- 
+The PoC available in this repository uses a FastAPI backend to serve a Frontend to the user that could request any image from their cell phone or PC. After the image is image requested the backend invoke the AI model to produce the image and return back it to the user
+
+-- SLIDE 6 --
+The user could consume this kind of service from a normal cell phone or a home PC, or maybe from something more industrial like a Jetson Device. This kind of deeplearning models will need a high performance CPU and GPU to run, so not every user device will be able to execute it without a cloud service.
+-- SLIDE 7 --
+So, How could we deploy the model? Which options do we have?
+On the left side we have the Cloud computing option, that is about deploying our model as a service in some cloud provider like GCP, Azure or AWS or having our own virtual private server in the cloud.
+On the other hand we have the edge computing option, that is about deploying the model or part of it in the final user device or edge server to inference the desired image.
+Both options have advantages and disadvantages
+
+-- SLIDE 8 --
+Edge computing is a great option if you need realtime response and reduce bandwidth or be able to work without internet connectivity. This is a common scenario working with video analytics. And also this kind of solution gives you data privacy because all data used is stored in the device inside your private network.
+But for this solution, you need a high performance device on each location, something like an Edge IoT device with GPU like a NVIDIA device. Could not be your case if you are planning to open your service to a normal user in any location.
+
+In Edge computing the cost is fixed, depends on how many devices you buy or how many locations you have to cover. Then you will have a cloud fixed price depends on how many devices you have to manage and monitor them.
+
+-- SLIDE 9 --
+Cloud computing is a great option when your final user will always have internet to consume your service. You will have full control over your service because at the end it is all deployed on the cloud platform (and not in devices distributed over the world).
+But in this case you have to manage very well how to scale every part of your solution (backend, APIs, DB, the GPU instance for inference) and always keep in mind that in this topology you are more open to security issues because it is all available for anyone with internet access.
+
+In Cloud computing the cost is variable, depends on the demand and how many resources you let available for scale
+
+-- SLIDE 10 --
+The best option is making something in between to pure edge or cloud solution (a mix solution). If your final client device has enough power to make the text encoder and final decoder process (with CPU only) you could serve a endpoint on cloud only for the diffusion inference (the GPU related). This will allow you to scale more your solution because the information that is sent over the internet is little compared to sending to the client an image.
+
+In this topology you are only sending and receiving embeddings, and the client could re-create the image of any resolution without limitation on the bandwidth.
+
+For achieving this, you also may scale your endpoint having a scale inference bank of GPUs at least of NVIDIA A100 GPU alike type.
+-- SLIDE 11 --
+No matters if you take the edge or cloud computing strategy, you will use some frameworks to achieve this needs:
+- In cloud or in an edge device you will use an operating system, sure based on linux. Apart of that you have to install or handle the SDK of your GPU provider to optimize your model execution (like NVIDIA TRT SDK, OpenVINO or using ONNX)
+- In cloud or in a edge device you have to deploy your model and your backend/frontend application, for sure you will need docker and maybe also kubernetes.  For edge or GCP cloud solutions you have the possibility of Tensorflow Serving.
+- You will need to monitor your solution in the field (in cloud or distributed in edge devices), and create reports to measure the quality of your service. For that you could use Prometheus for monitoring and Grafana for Dashboard reports. If you are using a Edge device strategy, you will also push your monitoring data into the cloud using something like KafKa or MQTT (some publish and subscriber protocol).
+
+
+-- SLIDE 12 --
+If you follow my previous recommendation about frameworks, you will be able to complete the MLOps process, you will be able to train and deploy your model and after that monitor and retrieve information to retrain again and improve.
+This kind of practice will help you to reduce bias in your data and your service. 
+For example if something requests you to generate an image of a torch, it could be a fire torch or a flashlight and the output should depend on the data and customer context/country.
+
+
+-- SLIDE 13 --
+Thanks, I hope you enjoy this little talk. In my channel you will find more videos about AI like this. Bye!
