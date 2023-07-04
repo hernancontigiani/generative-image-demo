@@ -1,4 +1,4 @@
-# Demostration
+# Demonstration
 ![banner](../../banner.jpg)
 
 I prepared a video to explain:
