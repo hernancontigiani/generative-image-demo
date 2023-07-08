@@ -21,7 +21,7 @@ Follow the documentation to understand how to achieve results like this:
 ## Documentation
 - [Choosing model](/docs/1-choosing_model/README.md)
 - [Web Application](/docs/2-web_application/README.md)
-- [Demostration](/docs/3-demostration/README.md)
+- [Demostration](/docs/3-demonstration/README.md)
 
 
 ## Thanks!
