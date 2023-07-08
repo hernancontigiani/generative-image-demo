@@ -1,4 +1,4 @@
-# Generative AI - "texto-to-image" demo
+# Generative AI - "text-to-image" demo
 ![banner](banner.jpg)
 
 ## About this project 🚀
