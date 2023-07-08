@@ -2,7 +2,7 @@
 ![banner](banner.jpg)
 
 ## About this project 🚀
-In this project I present a end-to-end demo from training you own text to image model and deploy it on a Web Application. Also I share a demostration about how this kind of models works and how to deploy & scale on production.
+In this project I present a end-to-end demo from training your own text to image model and deploy it on a Web Application. Also I share a demostration about how this kind of models works and how to deploy & scale on production.
 
 
 ## What you will same at the end
